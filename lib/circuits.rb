@@ -94,15 +94,3 @@ Network =
       conductances.inverse * currents
     end
   end
-
-NODES = %w[V0 V1 V2 V3].map(&Node.method(:new))
-
-NETWORK = Network.new(
-  NODES,
-  [
-    VoltageSource.new('VA', NODES[0], NODES[1], 1),
-    Resistor.new('R1', NODES[1], NODES[2], 1000),
-    Resistor.new('R2', NODES[2], NODES[3], 1000),
-    Resistor.new('R3', NODES[3], NODES[0], 1000)
-  ]
-)
