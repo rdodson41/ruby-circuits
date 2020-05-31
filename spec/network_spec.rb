@@ -8,7 +8,12 @@ RSpec.describe(Network) do
   end
 
   let :nodes do
-    %w[V0 V1 V2 V3].map(&Node.method(:new))
+    [
+      Node.new('V0', {}),
+      Node.new('V1', {}),
+      Node.new('V2', {}),
+      Node.new('V3', {})
+    ]
   end
 
   let :components do

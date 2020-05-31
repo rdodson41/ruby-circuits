@@ -2,9 +2,25 @@
 
 require('matrix')
 
-Node = Struct.new(:id)
+Node =
+  Struct.new(:id, :components) do
+    def initialize(id, components)
+      super
+      components.each do |component, index|
+        component.nodes[index] = self
+      end
+    end
+  end
 
-Component = Struct.new(:id, :nodes)
+Component =
+  Struct.new(:id, :nodes) do
+    def initialize(id, nodes)
+      super
+      nodes.each do |index, node|
+        node.components[self] = index
+      end
+    end
+  end
 
 class Resistor < Component
   attr_reader :resistance
