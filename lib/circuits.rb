@@ -4,13 +4,13 @@ require('matrix')
 
 Node = Struct.new(:id)
 
-Component = Struct.new(:id, :node0, :node1)
+Component = Struct.new(:id, :nodes)
 
 class Resistor < Component
   attr_reader :resistance
 
-  def initialize(id, node0, node1, resistance)
-    super(id, node0, node1)
+  def initialize(id, nodes, resistance)
+    super(id, nodes)
     @resistance = Float(resistance)
   end
 
@@ -26,8 +26,8 @@ end
 class VoltageSource < Component
   attr_reader :voltage
 
-  def initialize(id, node0, node1, voltage)
-    super(id, node0, node1)
+  def initialize(id, nodes, voltage)
+    super(id, nodes)
     @voltage = Float(voltage)
   end
 
@@ -54,8 +54,8 @@ Network =
       conductances = Matrix.zero(size)
 
       components.each do |component|
-        node0_index = nodes.index(component.node0) - 1
-        node1_index = nodes.index(component.node1) - 1
+        node0_index = nodes.index(component.nodes[0]) - 1
+        node1_index = nodes.index(component.nodes[1]) - 1
         case component
         when Resistor
           conductances[node0_index, node0_index] += component.conductance if node0_index != -1

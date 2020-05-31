@@ -13,10 +13,10 @@ RSpec.describe(Network) do
 
   let :components do
     [
-      VoltageSource.new('VA', nodes[0], nodes[1], 1),
-      Resistor.new('R1', nodes[1], nodes[2], 1000),
-      Resistor.new('R2', nodes[2], nodes[3], 1000),
-      Resistor.new('R3', nodes[3], nodes[0], 1000)
+      VoltageSource.new('VA', { 0 => nodes[0], 1 => nodes[1] }, 1),
+      Resistor.new('R1', { 0 => nodes[1], 1 => nodes[2] }, 1000),
+      Resistor.new('R2', { 0 => nodes[2], 1 => nodes[3] }, 1000),
+      Resistor.new('R3', { 0 => nodes[3], 1 => nodes[0] }, 1000)
     ]
   end
 
