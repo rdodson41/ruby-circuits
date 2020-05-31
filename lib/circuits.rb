@@ -58,11 +58,11 @@ Network =
         node1_index = nodes.index(component.node1) - 1
         case component
         when Resistor
-          conductances[node0_index, node0_index] -= component.conductance if node0_index != -1
-          conductances[node1_index, node1_index] -= component.conductance if node1_index != -1
+          conductances[node0_index, node0_index] += component.conductance if node0_index != -1
+          conductances[node1_index, node1_index] += component.conductance if node1_index != -1
           if node0_index != -1 && node1_index != -1
-            conductances[node0_index, node1_index] += component.conductance
-            conductances[node1_index, node0_index] += component.conductance
+            conductances[node0_index, node1_index] -= component.conductance
+            conductances[node1_index, node0_index] -= component.conductance
           end
         when VoltageSource
           voltage_source_index = offset + voltage_sources.index(component)

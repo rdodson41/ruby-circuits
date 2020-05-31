@@ -25,6 +25,6 @@ RSpec.describe(Network) do
       network.voltages
     end
 
-    it { is_expected.to(eq(Matrix[[1.0], [0.6666666666666666], [0.3333333333333333], [0.0003333333333333334]])) }
+    it { is_expected.to(eq(Matrix[[1.0], [0.6666666666666666], [0.3333333333333333], [-0.0003333333333333334]])) }
   end
 end
