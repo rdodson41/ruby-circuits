@@ -22,6 +22,12 @@ Component =
     end
   end
 
+class Ground < Component
+  def voltage_source?
+    false
+  end
+end
+
 class Resistor < Component
   attr_reader :resistance
 
@@ -55,7 +61,7 @@ end
 Network =
   Struct.new(:nodes, :components) do
     def offset
-      nodes.count - 1
+      nodes.count
     end
 
     def size
@@ -70,26 +76,25 @@ Network =
       conductances = Matrix.zero(size)
 
       components.each do |component|
-        node0_index = nodes.index(component.nodes[0]) - 1
-        node1_index = nodes.index(component.nodes[1]) - 1
         case component
+        when Ground
+          node0_index = nodes.index(component.nodes[0])
+          conductances[node0_index, node0_index] += Float::INFINITY
         when Resistor
-          conductances[node0_index, node0_index] += component.conductance if node0_index != -1
-          conductances[node1_index, node1_index] += component.conductance if node1_index != -1
-          if node0_index != -1 && node1_index != -1
-            conductances[node0_index, node1_index] -= component.conductance
-            conductances[node1_index, node0_index] -= component.conductance
-          end
+          node0_index = nodes.index(component.nodes[0])
+          node1_index = nodes.index(component.nodes[1])
+          conductances[node0_index, node0_index] += component.conductance
+          conductances[node1_index, node1_index] += component.conductance
+          conductances[node0_index, node1_index] -= component.conductance
+          conductances[node1_index, node0_index] -= component.conductance
         when VoltageSource
+          node0_index = nodes.index(component.nodes[0])
+          node1_index = nodes.index(component.nodes[1])
           voltage_source_index = offset + voltage_sources.index(component)
-          if node0_index != -1
-            conductances[node0_index, voltage_source_index] -= 1
-            conductances[voltage_source_index, node0_index] -= 1
-          end
-          if node1_index != -1
-            conductances[node1_index, voltage_source_index] += 1
-            conductances[voltage_source_index, node1_index] += 1
-          end
+          conductances[node0_index, voltage_source_index] -= 1
+          conductances[voltage_source_index, node0_index] -= 1
+          conductances[node1_index, voltage_source_index] += 1
+          conductances[voltage_source_index, node1_index] += 1
         end
       end
 
