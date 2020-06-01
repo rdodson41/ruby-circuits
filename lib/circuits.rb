@@ -76,25 +76,21 @@ Network =
       conductances = Matrix.zero(size)
 
       components.each do |component|
+        node_indices = component.nodes.values.map(&nodes.method(:index))
         case component
         when Ground
-          node0_index = nodes.index(component.nodes[0])
-          conductances[node0_index, node0_index] += Float::INFINITY
+          conductances[node_indices[0], node_indices[0]] += Float::INFINITY
         when Resistor
-          node0_index = nodes.index(component.nodes[0])
-          node1_index = nodes.index(component.nodes[1])
-          conductances[node0_index, node0_index] += component.conductance
-          conductances[node1_index, node1_index] += component.conductance
-          conductances[node0_index, node1_index] -= component.conductance
-          conductances[node1_index, node0_index] -= component.conductance
+          conductances[node_indices[0], node_indices[0]] += component.conductance
+          conductances[node_indices[1], node_indices[1]] += component.conductance
+          conductances[node_indices[0], node_indices[1]] -= component.conductance
+          conductances[node_indices[1], node_indices[0]] -= component.conductance
         when VoltageSource
-          node0_index = nodes.index(component.nodes[0])
-          node1_index = nodes.index(component.nodes[1])
           voltage_source_index = offset + voltage_sources.index(component)
-          conductances[node0_index, voltage_source_index] -= 1
-          conductances[voltage_source_index, node0_index] -= 1
-          conductances[node1_index, voltage_source_index] += 1
-          conductances[voltage_source_index, node1_index] += 1
+          conductances[node_indices[0], voltage_source_index] -= 1
+          conductances[voltage_source_index, node_indices[0]] -= 1
+          conductances[node_indices[1], voltage_source_index] += 1
+          conductances[voltage_source_index, node_indices[1]] += 1
         end
       end
 
