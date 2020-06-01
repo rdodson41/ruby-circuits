@@ -22,12 +22,6 @@ Component =
     end
   end
 
-class Ground < Component
-  def voltage_source?
-    false
-  end
-end
-
 class Resistor < Component
   attr_reader :resistance
 
@@ -38,6 +32,16 @@ class Resistor < Component
 
   def conductance
     1 / resistance
+  end
+
+  def voltage_source?
+    false
+  end
+end
+
+class Ground < Resistor
+  def initialize(id, nodes)
+    super(id, nodes, 0)
   end
 
   def voltage_source?
