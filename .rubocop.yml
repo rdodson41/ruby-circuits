@@ -6,6 +6,15 @@ require:
 AllCops:
   EnabledByDefault: true
 
+Metrics/BlockLength:
+  Enabled: false
+
+Metrics/MethodLength:
+  Enabled: false
+
+RSpec/ExampleLength:
+  Enabled: false
+
 Style/Copyright:
   Enabled: false
 
@@ -13,4 +22,7 @@ Style/Documentation:
   Enabled: false
 
 Style/DocumentationMethod:
+  Enabled: false
+
+Style/MissingElse:
   Enabled: false

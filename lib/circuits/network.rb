@@ -9,16 +9,18 @@ require('matrix')
 
 module Circuits
   class Network
-    attr_reader :nodes
     attr_reader :components
 
-    def initialize(nodes, components)
-      @nodes = nodes
+    def initialize(components)
       @components = components
     end
 
+    def node_indices
+      @node_indices ||= components.flat_map(&:nodes).uniq.each_with_index.to_h
+    end
+
     def offset
-      nodes.count
+      node_indices.count
     end
 
     def size
@@ -33,21 +35,21 @@ module Circuits
       conductances = Matrix.zero(size)
 
       components.each do |component|
-        node_indices = component.nodes.map(&nodes.method(:index))
+        component_node_indices = component.nodes.map { |node| node_indices[node] }
         case component
         when Ground
-          conductances[node_indices[0], node_indices[0]] += Float::INFINITY
+          conductances[component_node_indices[0], component_node_indices[0]] += component.conductance
         when Resistor
-          conductances[node_indices[0], node_indices[0]] += component.conductance
-          conductances[node_indices[1], node_indices[1]] += component.conductance
-          conductances[node_indices[0], node_indices[1]] -= component.conductance
-          conductances[node_indices[1], node_indices[0]] -= component.conductance
+          conductances[component_node_indices[0], component_node_indices[0]] += component.conductance
+          conductances[component_node_indices[1], component_node_indices[1]] += component.conductance
+          conductances[component_node_indices[0], component_node_indices[1]] -= component.conductance
+          conductances[component_node_indices[1], component_node_indices[0]] -= component.conductance
         when Inductor, VoltageSource
           voltage_source_index = offset + voltage_sources.index(component)
-          conductances[node_indices[0], voltage_source_index] -= 1
-          conductances[voltage_source_index, node_indices[0]] -= 1
-          conductances[node_indices[1], voltage_source_index] += 1
-          conductances[voltage_source_index, node_indices[1]] += 1
+          conductances[component_node_indices[0], voltage_source_index] -= 1
+          conductances[voltage_source_index, component_node_indices[0]] -= 1
+          conductances[component_node_indices[1], voltage_source_index] += 1
+          conductances[voltage_source_index, component_node_indices[1]] += 1
         end
       end
 
@@ -57,16 +59,18 @@ module Circuits
     def currents
       currents = Matrix.zero(size, 1)
 
-      voltage_sources.each.with_index(offset) do |voltage_source, index|
-        node_indices = voltage_source.nodes.map(&nodes.method(:index))
-        case voltage_source
+      components.each do |component|
+        component_node_indices = component.nodes.map { |node| node_indices[node] }
+        case component
         when CurrentSource
-          currents[node_indices[0], 0] += value
-          currents[node_indices[1], 0] -= value
+          currents[component_node_indices[0], 0] += component.current
+          currents[component_node_indices[1], 0] -= component.current
         when Inductor
-          currents[index, 0] = 0
+          voltage_source_index = offset + voltage_sources.index(component)
+          currents[voltage_source_index, 0] = 0
         when VoltageSource
-          currents[index, 0] = voltage_source.voltage
+          voltage_source_index = offset + voltage_sources.index(component)
+          currents[voltage_source_index, 0] = component.voltage
         end
       end
 

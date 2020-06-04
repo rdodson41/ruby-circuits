@@ -8,22 +8,15 @@ require('circuits')
 
 # You can add fixtures and/or initialization code here to make experimenting
 # with your gem easier. You can also use a different console, if you like.
-NODES = [
-  Circuits::Node.new('V0'),
-  Circuits::Node.new('V1'),
-  Circuits::Node.new('V2'),
-  Circuits::Node.new('V3')
-].freeze
-
 COMPONENTS = [
-  Circuits::Ground.new('GR', [NODES[0]]),
-  Circuits::VoltageSource.new('VA', [NODES[0], NODES[1]], 1),
-  Circuits::Resistor.new('R1', [NODES[1], NODES[2]], 1000),
-  Circuits::Resistor.new('R2', [NODES[2], NODES[3]], 1000),
-  Circuits::Resistor.new('R3', [NODES[3], NODES[0]], 1000)
+  Circuits::Ground.new('GR', [0]),
+  Circuits::VoltageSource.new('VA', [0, 1], 1),
+  Circuits::Resistor.new('R1', [1, 2], 1000),
+  Circuits::Resistor.new('R2', [2, 3], 1000),
+  Circuits::Resistor.new('R3', [3, 0], 1000)
 ].freeze
 
-NETWORK = Circuits::Network.new(NODES, COMPONENTS)
+NETWORK = Circuits::Network.new(COMPONENTS)
 
 # (If you use this, don't forget to add pry to your Gemfile!)
 require('pry')
