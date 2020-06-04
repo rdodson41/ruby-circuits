@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require('circuits/capacitor')
 require('circuits/current_source')
 require('circuits/ground')
 require('circuits/inductor')

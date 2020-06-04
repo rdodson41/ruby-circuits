@@ -1,0 +1,31 @@
+--- !ruby/object:Circuits::Network
+components:
+- !ruby/object:Circuits::Ground
+  id: G1
+  nodes:
+  - 0
+  resistance: 0.0
+- !ruby/object:Circuits::VoltageSource
+  id: V1
+  nodes:
+  - 0
+  - 1
+  voltage: 1.0
+- !ruby/object:Circuits::Resistor
+  id: R1
+  nodes:
+  - 1
+  - 2
+  resistance: 1000.0
+- !ruby/object:Circuits::Resistor
+  id: R2
+  nodes:
+  - 2
+  - 3
+  resistance: 1000.0
+- !ruby/object:Circuits::Resistor
+  id: R3
+  nodes:
+  - 3
+  - 0
+  resistance: 1000.0

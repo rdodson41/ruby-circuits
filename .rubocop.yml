@@ -7,13 +7,8 @@ AllCops:
   EnabledByDefault: true
 
 Metrics/BlockLength:
-  Enabled: false
-
-Metrics/MethodLength:
-  Enabled: false
-
-RSpec/ExampleLength:
-  Enabled: false
+  Exclude:
+    - spec/**/*_spec.rb
 
 Style/Copyright:
   Enabled: false

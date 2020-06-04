@@ -1,7 +1,13 @@
 # frozen_string_literal: true
 
 module Circuits
-  Component = Struct.new(:id, :nodes)
+  class Component
+    attr_reader :id
+    attr_reader :nodes
 
-  public_constant :Component
+    def initialize(id, nodes)
+      @id = id
+      @nodes = nodes
+    end
+  end
 end

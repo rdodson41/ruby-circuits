@@ -1,0 +1,103 @@
+--- !ruby/object:Circuits::Network
+components:
+- !ruby/object:Circuits::Ground
+  id: G1
+  nodes:
+  - 0
+  resistance: 0.0
+- !ruby/object:Circuits::VoltageSource
+  id: V1
+  nodes:
+  - 0
+  - 5
+  voltage: 2.0
+- !ruby/object:Circuits::VoltageSource
+  id: V2
+  nodes:
+  - 2
+  - 3
+  voltage: 0.2
+- !ruby/object:Circuits::VoltageSource
+  id: V3
+  nodes:
+  - 6
+  - 7
+  voltage: 2.0
+- !ruby/object:Circuits::Resistor
+  id: R1
+  nodes:
+  - 1
+  - 5
+  resistance: 1.5
+- !ruby/object:Circuits::Resistor
+  id: R2
+  nodes:
+  - 1
+  - 12
+  resistance: 1.0
+- !ruby/object:Circuits::Resistor
+  id: R3
+  nodes:
+  - 5
+  - 2
+  resistance: 50.0
+- !ruby/object:Circuits::Resistor
+  id: R4
+  nodes:
+  - 5
+  - 6
+  resistance: 0.1
+- !ruby/object:Circuits::Resistor
+  id: R5
+  nodes:
+  - 2
+  - 6
+  resistance: 1.5
+- !ruby/object:Circuits::Resistor
+  id: R6
+  nodes:
+  - 3
+  - 4
+  resistance: 0.2
+- !ruby/object:Circuits::Resistor
+  id: R7
+  nodes:
+  - 7
+  - 0
+  resistance: 1000.0
+- !ruby/object:Circuits::Resistor
+  id: R8
+  nodes:
+  - 4
+  - 0
+  resistance: 10.0
+- !ruby/object:Circuits::CurrentSource
+  id: I1
+  nodes:
+  - 7
+  - 4
+  current: 0.001
+- !ruby/object:Circuits::CurrentSource
+  id: I2
+  nodes:
+  - 6
+  - 0
+  current: 0.001
+- !ruby/object:Circuits::Capacitor
+  id: C1
+  nodes:
+  - 7
+  - 0
+  capacitance: 0.1
+- !ruby/object:Circuits::Capacitor
+  id: C2
+  nodes:
+  - 2
+  - 0
+  capacitance: 0.2
+- !ruby/object:Circuits::Inductor
+  id: L1
+  nodes:
+  - 2
+  - 12
+  inductance: 0.1

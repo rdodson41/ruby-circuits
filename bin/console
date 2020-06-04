@@ -5,18 +5,11 @@ $LOAD_PATH << 'lib'
 
 require('bundler/setup')
 require('circuits')
+require('yaml')
 
 # You can add fixtures and/or initialization code here to make experimenting
 # with your gem easier. You can also use a different console, if you like.
-COMPONENTS = [
-  Circuits::Ground.new('GR', [0]),
-  Circuits::VoltageSource.new('VA', [0, 1], 1),
-  Circuits::Resistor.new('R1', [1, 2], 1000),
-  Circuits::Resistor.new('R2', [2, 3], 1000),
-  Circuits::Resistor.new('R3', [3, 0], 1000)
-].freeze
-
-NETWORK = Circuits::Network.new(COMPONENTS)
+NETWORK = YAML.load_file('spec/fixtures/circuits/networks/example0.yaml')
 
 # (If you use this, don't forget to add pry to your Gemfile!)
 require('pry')
