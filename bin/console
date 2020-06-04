@@ -9,21 +9,21 @@ require('circuits')
 # You can add fixtures and/or initialization code here to make experimenting
 # with your gem easier. You can also use a different console, if you like.
 NODES = [
-  Node.new('V0', {}),
-  Node.new('V1', {}),
-  Node.new('V2', {}),
-  Node.new('V3', {})
+  Circuits::Node.new('V0'),
+  Circuits::Node.new('V1'),
+  Circuits::Node.new('V2'),
+  Circuits::Node.new('V3')
 ].freeze
 
 COMPONENTS = [
-  Ground.new('GR', { 0 => NODES[0] }),
-  VoltageSource.new('VA', { 0 => NODES[0], 1 => NODES[1] }, 1),
-  Resistor.new('R1', { 0 => NODES[1], 1 => NODES[2] }, 1000),
-  Resistor.new('R2', { 0 => NODES[2], 1 => NODES[3] }, 1000),
-  Resistor.new('R3', { 0 => NODES[3], 1 => NODES[0] }, 1000)
+  Circuits::Ground.new('GR', [NODES[0]]),
+  Circuits::VoltageSource.new('VA', [NODES[0], NODES[1]], 1),
+  Circuits::Resistor.new('R1', [NODES[1], NODES[2]], 1000),
+  Circuits::Resistor.new('R2', [NODES[2], NODES[3]], 1000),
+  Circuits::Resistor.new('R3', [NODES[3], NODES[0]], 1000)
 ].freeze
 
-NETWORK = Network.new(NODES, COMPONENTS)
+NETWORK = Circuits::Network.new(NODES, COMPONENTS)
 
 # (If you use this, don't forget to add pry to your Gemfile!)
 require('pry')
