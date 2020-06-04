@@ -32,8 +32,9 @@ module Circuits
       components.select(&:voltage_source?)
     end
 
-    def conductances
+    def modified_nodal_analysis
       conductances = Matrix.zero(size)
+      currents = Matrix.zero(size, 1)
 
       components.each do |component|
         component_node_indices = component.nodes.map { |node| node_indices[node] }
@@ -45,40 +46,31 @@ module Circuits
           conductances[component_node_indices[1], component_node_indices[1]] += component.conductance
           conductances[component_node_indices[0], component_node_indices[1]] -= component.conductance
           conductances[component_node_indices[1], component_node_indices[0]] -= component.conductance
-        when Inductor, VoltageSource
-          voltage_source_index = offset + voltage_sources.index(component)
-          conductances[component_node_indices[0], voltage_source_index] -= 1
-          conductances[voltage_source_index, component_node_indices[0]] -= 1
-          conductances[component_node_indices[1], voltage_source_index] += 1
-          conductances[voltage_source_index, component_node_indices[1]] += 1
-        end
-      end
-
-      conductances
-    end
-
-    def currents
-      currents = Matrix.zero(size, 1)
-
-      components.each do |component|
-        component_node_indices = component.nodes.map { |node| node_indices[node] }
-        case component
         when CurrentSource
           currents[component_node_indices[0], 0] += component.current
           currents[component_node_indices[1], 0] -= component.current
         when Inductor
           voltage_source_index = offset + voltage_sources.index(component)
+          conductances[component_node_indices[0], voltage_source_index] -= 1
+          conductances[voltage_source_index, component_node_indices[0]] -= 1
+          conductances[component_node_indices[1], voltage_source_index] += 1
+          conductances[voltage_source_index, component_node_indices[1]] += 1
           currents[voltage_source_index, 0] = 0
         when VoltageSource
           voltage_source_index = offset + voltage_sources.index(component)
+          conductances[component_node_indices[0], voltage_source_index] -= 1
+          conductances[voltage_source_index, component_node_indices[0]] -= 1
+          conductances[component_node_indices[1], voltage_source_index] += 1
+          conductances[voltage_source_index, component_node_indices[1]] += 1
           currents[voltage_source_index, 0] = component.voltage
         end
       end
 
-      currents
+      [conductances, currents]
     end
 
     def voltages
+      conductances, currents = modified_nodal_analysis
       conductances.inverse * currents
     end
   end
