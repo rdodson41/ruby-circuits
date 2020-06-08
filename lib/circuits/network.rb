@@ -38,13 +38,13 @@ module Circuits
 
       components.reject(&:voltage_source?).each do |component|
         case component
-        when Ground
-          conductances[node_indices[component.nodes[0]], node_indices[component.nodes[0]]] += component.conductance
         when Resistor
-          conductances[node_indices[component.nodes[0]], node_indices[component.nodes[0]]] += component.conductance
-          conductances[node_indices[component.nodes[1]], node_indices[component.nodes[1]]] += component.conductance
-          conductances[node_indices[component.nodes[0]], node_indices[component.nodes[1]]] -= component.conductance
-          conductances[node_indices[component.nodes[1]], node_indices[component.nodes[0]]] -= component.conductance
+          component.nodes.each do |node|
+            conductances[node_indices[node], node_indices[node]] += component.conductance
+          end
+          component.nodes.permutation(2).each do |nodes|
+            conductances[node_indices[nodes[0]], node_indices[nodes[1]]] -= component.conductance
+          end
         when CurrentSource
           currents[node_indices[component.nodes[0]], 0] += component.current
           currents[node_indices[component.nodes[1]], 0] -= component.current
@@ -52,20 +52,11 @@ module Circuits
       end
 
       components.select(&:voltage_source?).each.with_index(offset) do |component, voltage_source_index|
-        case component
-        when Inductor
-          conductances[node_indices[component.nodes[0]], voltage_source_index] -= 1
-          conductances[voltage_source_index, node_indices[component.nodes[0]]] -= 1
-          conductances[node_indices[component.nodes[1]], voltage_source_index] += 1
-          conductances[voltage_source_index, node_indices[component.nodes[1]]] += 1
-          currents[voltage_source_index, 0] = 0
-        when VoltageSource
-          conductances[node_indices[component.nodes[0]], voltage_source_index] -= 1
-          conductances[voltage_source_index, node_indices[component.nodes[0]]] -= 1
-          conductances[node_indices[component.nodes[1]], voltage_source_index] += 1
-          conductances[voltage_source_index, node_indices[component.nodes[1]]] += 1
-          currents[voltage_source_index, 0] = component.voltage
-        end
+        conductances[node_indices[component.nodes[0]], voltage_source_index] -= 1
+        conductances[voltage_source_index, node_indices[component.nodes[0]]] -= 1
+        conductances[node_indices[component.nodes[1]], voltage_source_index] += 1
+        conductances[voltage_source_index, node_indices[component.nodes[1]]] += 1
+        currents[voltage_source_index, 0] = component.voltage if component.is_a?(VoltageSource)
       end
 
       [conductances, currents]
