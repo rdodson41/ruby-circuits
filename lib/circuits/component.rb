@@ -18,8 +18,8 @@ module Circuits
       0.0
     end
 
-    def conductance
-      0.0
+    def conductor?
+      false
     end
   end
 end

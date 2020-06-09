@@ -36,15 +36,16 @@ module Circuits
       conductances = Matrix.zero(size)
       currents = Matrix.zero(size, 1)
 
-      components.reject(&:voltage_source?).each do |component|
-        if component.conductance != 0
-          component.nodes.each do |node|
-            conductances[node_indices[node], node_indices[node]] += component.conductance
-          end
-          component.nodes.permutation(2).each do |nodes|
-            conductances[node_indices[nodes[0]], node_indices[nodes[1]]] -= component.conductance
-          end
+      components.select(&:conductor?).each do |component|
+        component.nodes.each do |node|
+          conductances[node_indices[node], node_indices[node]] += component.conductance
         end
+        component.nodes.permutation(2).each do |nodes|
+          conductances[node_indices[nodes[0]], node_indices[nodes[1]]] -= component.conductance
+        end
+      end
+
+      components.reject(&:voltage_source?).each do |component|
         if component.current != 0
           currents[node_indices[component.nodes[0]], 0] += component.current
           currents[node_indices[component.nodes[1]], 0] -= component.current

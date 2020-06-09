@@ -18,5 +18,9 @@ module Circuits
     def voltage_source?
       false
     end
+
+    def conductor?
+      true
+    end
   end
 end
