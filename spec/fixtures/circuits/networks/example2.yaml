@@ -74,14 +74,14 @@ components:
 - !ruby/object:Circuits::CurrentSource
   id: I1
   nodes:
-  - 7
   - 4
+  - 7
   current: 0.001
 - !ruby/object:Circuits::CurrentSource
   id: I2
   nodes:
-  - 6
   - 0
+  - 6
   current: 0.001
 - !ruby/object:Circuits::Capacitor
   id: C1

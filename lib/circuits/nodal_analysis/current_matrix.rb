@@ -42,8 +42,8 @@ module Circuits
 
       def apply_current
         components.select(&:current_source?).each do |component|
-          self[component.nodes[0]] += component.current
-          self[component.nodes[1]] -= component.current
+          self[component.nodes[0]] -= component.current
+          self[component.nodes[1]] += component.current
         end
       end
     end
