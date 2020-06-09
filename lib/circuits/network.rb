@@ -56,7 +56,7 @@ module Circuits
         conductances[voltage_source_index, node_indices[component.nodes[0]]] -= 1
         conductances[node_indices[component.nodes[1]], voltage_source_index] += 1
         conductances[voltage_source_index, node_indices[component.nodes[1]]] += 1
-        currents[voltage_source_index, 0] = component.voltage if component.is_a?(VoltageSource)
+        currents[voltage_source_index, 0] = component.voltage
       end
 
       [conductances, currents]

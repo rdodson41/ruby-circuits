@@ -10,6 +10,10 @@ module Circuits
       @nodes = nodes
     end
 
+    def voltage
+      0.0
+    end
+
     def current
       0.0
     end
