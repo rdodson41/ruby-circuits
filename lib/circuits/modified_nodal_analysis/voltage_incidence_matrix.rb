@@ -6,18 +6,14 @@ require('matrix')
 module Circuits
   module ModifiedNodalAnalysis
     class VoltageIncidenceMatrix < SimpleDelegator
-      attr_reader :components
+      attr_reader :voltage_sources
       attr_reader :nodes_indices
 
-      def initialize(components, nodes_indices)
-        @components = components
+      def initialize(voltage_sources, nodes_indices)
+        @voltage_sources = voltage_sources
         @nodes_indices = nodes_indices
         super(zero_matrix)
         apply_voltage_incidence
-      end
-
-      def voltage_sources_count
-        @voltage_sources_count ||= components.count(&:voltage_source?)
       end
 
       def [](row, column)
@@ -31,13 +27,13 @@ module Circuits
       private
 
       def zero_matrix
-        Matrix.zero(nodes_indices.size, voltage_sources_count)
+        Matrix.zero(nodes_indices.size, voltage_sources.count)
       end
 
       def apply_voltage_incidence
-        components.select(&:voltage_source?).each.with_index do |component, index|
-          self[component.nodes[0], index] -= 1
-          self[component.nodes[1], index] += 1
+        voltage_sources.each.with_index do |voltage_source, index|
+          self[voltage_source.nodes[0], index] -= 1
+          self[voltage_source.nodes[1], index] += 1
         end
       end
     end

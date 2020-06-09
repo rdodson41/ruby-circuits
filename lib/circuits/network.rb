@@ -10,6 +10,18 @@ module Circuits
       @components = components
     end
 
+    def conductors
+      components.select(&:conductor?)
+    end
+
+    def current_sources
+      components.select(&:current_source?)
+    end
+
+    def voltage_sources
+      components.select(&:voltage_source?)
+    end
+
     def nodes
       @nodes ||= components.flat_map(&:nodes).uniq
     end
@@ -19,7 +31,7 @@ module Circuits
     end
 
     def x_matrix
-      ModifiedNodalAnalysis::XMatrix.new(components, nodes_indices)
+      ModifiedNodalAnalysis::XMatrix.new(conductors, current_sources, voltage_sources, nodes_indices)
     end
   end
 end

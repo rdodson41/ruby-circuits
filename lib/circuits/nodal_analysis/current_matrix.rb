@@ -6,11 +6,11 @@ require('matrix')
 module Circuits
   module NodalAnalysis
     class CurrentMatrix < SimpleDelegator
-      attr_reader :components
+      attr_reader :current_sources
       attr_reader :nodes_indices
 
-      def initialize(components, nodes_indices)
-        @components = components
+      def initialize(current_sources, nodes_indices)
+        @current_sources = current_sources
         @nodes_indices = nodes_indices
         super(zero_matrix)
         apply_current
@@ -31,9 +31,9 @@ module Circuits
       end
 
       def apply_current
-        components.select(&:current_source?).each do |component|
-          self[component.nodes[0]] -= component.current
-          self[component.nodes[1]] += component.current
+        current_sources.each do |current_source|
+          self[current_source.nodes[0]] -= current_source.current
+          self[current_source.nodes[1]] += current_source.current
         end
       end
     end

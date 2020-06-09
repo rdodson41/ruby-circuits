@@ -8,21 +8,23 @@ require('matrix')
 module Circuits
   module ModifiedNodalAnalysis
     class BMatrix < SimpleDelegator
-      attr_reader :components
+      attr_reader :current_sources
+      attr_reader :voltage_sources
       attr_reader :nodes_indices
 
-      def initialize(components, nodes_indices)
-        @components = components
+      def initialize(current_sources, voltage_sources, nodes_indices)
+        @current_sources = current_sources
+        @voltage_sources = voltage_sources
         @nodes_indices = nodes_indices
         super(b_matrix)
       end
 
       def current_matrix
-        NodalAnalysis::CurrentMatrix.new(components, nodes_indices)
+        NodalAnalysis::CurrentMatrix.new(current_sources, nodes_indices)
       end
 
       def voltage_matrix
-        ModifiedNodalAnalysis::VoltageMatrix.new(components)
+        ModifiedNodalAnalysis::VoltageMatrix.new(voltage_sources)
       end
 
       private
