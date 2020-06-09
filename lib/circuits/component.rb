@@ -14,8 +14,8 @@ module Circuits
       0.0
     end
 
-    def current
-      0.0
+    def current_source?
+      false
     end
 
     def conductor?

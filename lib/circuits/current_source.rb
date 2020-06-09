@@ -14,5 +14,9 @@ module Circuits
     def voltage_source?
       false
     end
+
+    def current_source?
+      true
+    end
   end
 end

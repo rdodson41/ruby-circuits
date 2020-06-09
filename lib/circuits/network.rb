@@ -45,11 +45,9 @@ module Circuits
         end
       end
 
-      components.reject(&:voltage_source?).each do |component|
-        if component.current != 0
-          currents[node_indices[component.nodes[0]], 0] += component.current
-          currents[node_indices[component.nodes[1]], 0] -= component.current
-        end
+      components.select(&:current_source?).each do |component|
+        currents[node_indices[component.nodes[0]], 0] += component.current
+        currents[node_indices[component.nodes[1]], 0] -= component.current
       end
 
       components.select(&:voltage_source?).each.with_index(offset) do |component, voltage_source_index|
