@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require('circuits/modified_nodal_analysis/voltage_matrix')
 require('circuits/nodal_analysis/current_matrix')
 require('delegate')
 require('matrix')
@@ -24,10 +23,14 @@ module Circuits
       end
 
       def voltage_matrix
-        ModifiedNodalAnalysis::VoltageMatrix.new(voltage_sources)
+        Matrix.column_vector(voltages)
       end
 
       private
+
+      def voltages
+        voltage_sources.map(&:voltage)
+      end
 
       def b_matrix
         Matrix.vstack(current_matrix, voltage_matrix)

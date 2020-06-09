@@ -23,11 +23,11 @@ module Circuits
     end
 
     def nodes
-      @nodes ||= components.flat_map(&:nodes).uniq
+      components.flat_map(&:nodes).uniq
     end
 
     def nodes_indices
-      @nodes_indices ||= nodes.map.with_index.to_h
+      nodes.map.with_index.to_h
     end
 
     def x_matrix
