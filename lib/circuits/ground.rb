@@ -8,10 +8,6 @@ module Circuits
       Float::INFINITY
     end
 
-    def voltage_source?
-      false
-    end
-
     def conductor?
       true
     end

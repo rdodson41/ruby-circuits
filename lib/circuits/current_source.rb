@@ -11,10 +11,6 @@ module Circuits
       @current = Float(current)
     end
 
-    def voltage_source?
-      false
-    end
-
     def current_source?
       true
     end

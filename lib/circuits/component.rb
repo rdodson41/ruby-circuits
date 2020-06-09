@@ -10,8 +10,8 @@ module Circuits
       @nodes = nodes
     end
 
-    def voltage
-      0.0
+    def voltage_source?
+      false
     end
 
     def current_source?

@@ -10,9 +10,5 @@ module Circuits
       super(id, nodes)
       @capacitance = Float(capacitance)
     end
-
-    def voltage_source?
-      false
-    end
   end
 end

@@ -11,6 +11,10 @@ module Circuits
       @inductance = Float(inductance)
     end
 
+    def voltage
+      0.0
+    end
+
     def voltage_source?
       true
     end

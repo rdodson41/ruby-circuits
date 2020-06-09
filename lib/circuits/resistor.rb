@@ -15,10 +15,6 @@ module Circuits
       1 / resistance
     end
 
-    def voltage_source?
-      false
-    end
-
     def conductor?
       true
     end
