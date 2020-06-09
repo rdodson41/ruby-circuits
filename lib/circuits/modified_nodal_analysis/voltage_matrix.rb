@@ -4,14 +4,14 @@ require('delegate')
 require('matrix')
 
 module Circuits
-  module NodalAnalysis
-    class CurrentMatrix < SimpleDelegator
+  module ModifiedNodalAnalysis
+    class VoltageMatrix < SimpleDelegator
       attr_reader :components
 
       def initialize(components)
         @components = components
         super(zero_matrix)
-        apply_current
+        apply_voltage
       end
 
       def nodes
@@ -22,28 +22,27 @@ module Circuits
         @nodes_count ||= nodes.count
       end
 
-      def nodes_indices
-        @nodes_indices ||= nodes.map.with_index.to_h
+      def voltage_sources_count
+        @voltage_sources_count ||= components.count(&:voltage_source?)
       end
 
       def [](row)
-        super(nodes_indices[row], 0)
+        super(row, 0)
       end
 
       def []=(row, value)
-        super(nodes_indices[row], 0, value)
+        super(row, 0, value)
       end
 
       private
 
       def zero_matrix
-        Matrix.zero(nodes_count, 1)
+        Matrix.zero(voltage_sources_count, 1)
       end
 
-      def apply_current
-        components.select(&:current_source?).each do |component|
-          self[component.nodes[0]] += component.current
-          self[component.nodes[1]] -= component.current
+      def apply_voltage
+        components.select(&:voltage_source?).each.with_index do |component, index|
+          self[index] = component.voltage
         end
       end
     end
