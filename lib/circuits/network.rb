@@ -45,8 +45,7 @@ module Circuits
             conductances[node_indices[nodes[0]], node_indices[nodes[1]]] -= component.conductance
           end
         end
-        case component
-        when CurrentSource
+        if component.current != 0
           currents[node_indices[component.nodes[0]], 0] += component.current
           currents[node_indices[component.nodes[1]], 0] -= component.current
         end
