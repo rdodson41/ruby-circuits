@@ -1,12 +1,6 @@
 # frozen_string_literal: true
 
-require('circuits/capacitor')
-require('circuits/current_source')
-require('circuits/ground')
-require('circuits/inductor')
 require('circuits/modified_nodal_analysis/x_matrix')
-require('circuits/resistor')
-require('circuits/voltage_source')
 
 module Circuits
   class Network
@@ -16,8 +10,16 @@ module Circuits
       @components = components
     end
 
+    def nodes
+      @nodes ||= components.flat_map(&:nodes).uniq
+    end
+
+    def nodes_indices
+      @nodes_indices ||= nodes.map.with_index.to_h
+    end
+
     def x_matrix
-      ModifiedNodalAnalysis::XMatrix.new(components)
+      ModifiedNodalAnalysis::XMatrix.new(components, nodes_indices)
     end
   end
 end

@@ -10,18 +10,20 @@ module Circuits
   module ModifiedNodalAnalysis
     class AMatrix < SimpleDelegator
       attr_reader :components
+      attr_reader :nodes_indices
 
-      def initialize(components)
+      def initialize(components, nodes_indices)
         @components = components
+        @nodes_indices = nodes_indices
         super(a_matrix)
       end
 
       def conductance_matrix
-        NodalAnalysis::ConductanceMatrix.new(components)
+        NodalAnalysis::ConductanceMatrix.new(components, nodes_indices)
       end
 
       def voltage_incidence_matrix
-        ModifiedNodalAnalysis::VoltageIncidenceMatrix.new(components)
+        ModifiedNodalAnalysis::VoltageIncidenceMatrix.new(components, nodes_indices)
       end
 
       def zero_matrix

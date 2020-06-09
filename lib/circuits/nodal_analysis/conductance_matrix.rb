@@ -7,19 +7,13 @@ module Circuits
   module NodalAnalysis
     class ConductanceMatrix < SimpleDelegator
       attr_reader :components
+      attr_reader :nodes_indices
 
-      def initialize(components)
+      def initialize(components, nodes_indices)
         @components = components
+        @nodes_indices = nodes_indices
         super(zero_matrix)
         apply_conductance
-      end
-
-      def nodes
-        @nodes ||= components.flat_map(&:nodes).uniq
-      end
-
-      def nodes_indices
-        @nodes_indices ||= nodes.map.with_index.to_h
       end
 
       def [](row, column)
@@ -33,7 +27,7 @@ module Circuits
       private
 
       def zero_matrix
-        Matrix.zero(nodes.count)
+        Matrix.zero(nodes_indices.size)
       end
 
       def apply_conductance

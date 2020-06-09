@@ -7,23 +7,17 @@ module Circuits
   module ModifiedNodalAnalysis
     class VoltageIncidenceMatrix < SimpleDelegator
       attr_reader :components
+      attr_reader :nodes_indices
 
-      def initialize(components)
+      def initialize(components, nodes_indices)
         @components = components
+        @nodes_indices = nodes_indices
         super(zero_matrix)
         apply_voltage_incidence
       end
 
-      def nodes
-        @nodes ||= components.flat_map(&:nodes).uniq
-      end
-
       def voltage_sources_count
         @voltage_sources_count ||= components.count(&:voltage_source?)
-      end
-
-      def nodes_indices
-        @nodes_indices ||= nodes.map.with_index.to_h
       end
 
       def [](row, column)
@@ -37,7 +31,7 @@ module Circuits
       private
 
       def zero_matrix
-        Matrix.zero(nodes.count, voltage_sources_count)
+        Matrix.zero(nodes_indices.size, voltage_sources_count)
       end
 
       def apply_voltage_incidence
