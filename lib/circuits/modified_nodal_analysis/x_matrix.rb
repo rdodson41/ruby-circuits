@@ -15,18 +15,18 @@ module Circuits
         super(x_matrix)
       end
 
-      def modified_nodal_analysis_a_matrix
+      def a_matrix
         ModifiedNodalAnalysis::AMatrix.new(components)
       end
 
-      def modified_nodal_analysis_b_matrix
+      def b_matrix
         ModifiedNodalAnalysis::BMatrix.new(components)
       end
 
       private
 
       def x_matrix
-        modified_nodal_analysis_a_matrix.inverse * modified_nodal_analysis_b_matrix.to_matrix
+        a_matrix.inverse * b_matrix.to_matrix
       end
     end
   end

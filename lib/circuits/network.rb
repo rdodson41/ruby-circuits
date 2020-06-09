@@ -16,7 +16,7 @@ module Circuits
       @components = components
     end
 
-    def modified_nodal_analysis_x_matrix
+    def x_matrix
       ModifiedNodalAnalysis::XMatrix.new(components)
     end
   end

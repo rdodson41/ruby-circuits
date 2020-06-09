@@ -18,10 +18,6 @@ module Circuits
         @nodes ||= components.flat_map(&:nodes).uniq
       end
 
-      def nodes_count
-        @nodes_count ||= nodes.count
-      end
-
       def nodes_indices
         @nodes_indices ||= nodes.map.with_index.to_h
       end
@@ -37,7 +33,7 @@ module Circuits
       private
 
       def zero_matrix
-        Matrix.zero(nodes_count, 1)
+        Matrix.zero(nodes.count, 1)
       end
 
       def apply_current

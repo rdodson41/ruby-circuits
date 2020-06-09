@@ -15,21 +15,18 @@ module Circuits
         super(b_matrix)
       end
 
-      def nodal_analysis_current_matrix
+      def current_matrix
         NodalAnalysis::CurrentMatrix.new(components)
       end
 
-      def modified_nodal_analysis_voltage_matrix
+      def voltage_matrix
         ModifiedNodalAnalysis::VoltageMatrix.new(components)
       end
 
       private
 
       def b_matrix
-        Matrix.vstack(
-          nodal_analysis_current_matrix,
-          modified_nodal_analysis_voltage_matrix
-        )
+        Matrix.vstack(current_matrix, voltage_matrix)
       end
     end
   end

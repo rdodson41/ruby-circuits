@@ -18,10 +18,6 @@ module Circuits
         @nodes ||= components.flat_map(&:nodes).uniq
       end
 
-      def nodes_count
-        @nodes_count ||= nodes.count
-      end
-
       def voltage_sources_count
         @voltage_sources_count ||= components.count(&:voltage_source?)
       end
@@ -41,7 +37,7 @@ module Circuits
       private
 
       def zero_matrix
-        Matrix.zero(nodes_count, voltage_sources_count)
+        Matrix.zero(nodes.count, voltage_sources_count)
       end
 
       def apply_voltage_incidence

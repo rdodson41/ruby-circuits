@@ -14,14 +14,6 @@ module Circuits
         apply_voltage
       end
 
-      def nodes
-        @nodes ||= components.flat_map(&:nodes).uniq
-      end
-
-      def nodes_count
-        @nodes_count ||= nodes.count
-      end
-
       def voltage_sources_count
         @voltage_sources_count ||= components.count(&:voltage_source?)
       end
