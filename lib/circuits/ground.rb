@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
-require('circuits/resistor')
+require('circuits/component')
 
 module Circuits
-  class Ground < Resistor
-    def initialize(id, nodes)
-      super(id, nodes, 0)
+  class Ground < Component
+    def conductance
+      Float::INFINITY
     end
 
     def voltage_source?

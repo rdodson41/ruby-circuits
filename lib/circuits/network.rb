@@ -37,14 +37,15 @@ module Circuits
       currents = Matrix.zero(size, 1)
 
       components.reject(&:voltage_source?).each do |component|
-        case component
-        when Resistor
+        if component.conductance != 0
           component.nodes.each do |node|
             conductances[node_indices[node], node_indices[node]] += component.conductance
           end
           component.nodes.permutation(2).each do |nodes|
             conductances[node_indices[nodes[0]], node_indices[nodes[1]]] -= component.conductance
           end
+        end
+        case component
         when CurrentSource
           currents[node_indices[component.nodes[0]], 0] += component.current
           currents[node_indices[component.nodes[1]], 0] -= component.current

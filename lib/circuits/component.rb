@@ -9,5 +9,9 @@ module Circuits
       @id = id
       @nodes = nodes
     end
+
+    def conductance
+      0.0
+    end
   end
 end
