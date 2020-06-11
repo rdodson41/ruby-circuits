@@ -1,0 +1,54 @@
+--- !ruby/object:Circuits::ConductanceMatrix
+nodes:
+- 0
+- 5
+- 2
+- 3
+- 6
+- 7
+- 1
+- 12
+- 4
+conductors:
+- !ruby/object:Circuits::Ground
+  node: 0
+- !ruby/object:Circuits::Resistor
+  nodes:
+  - 1
+  - 5
+  resistance: 1.5
+- !ruby/object:Circuits::Resistor
+  nodes:
+  - 1
+  - 12
+  resistance: 1
+- !ruby/object:Circuits::Resistor
+  nodes:
+  - 5
+  - 2
+  resistance: 50
+- !ruby/object:Circuits::Resistor
+  nodes:
+  - 5
+  - 6
+  resistance: 0.1
+- !ruby/object:Circuits::Resistor
+  nodes:
+  - 2
+  - 6
+  resistance: 1.5
+- !ruby/object:Circuits::Resistor
+  nodes:
+  - 3
+  - 4
+  resistance: 0.2
+- !ruby/object:Circuits::Resistor
+  nodes:
+  - 7
+  - 0
+  resistance: 1000.0
+- !ruby/object:Circuits::Resistor
+  nodes:
+  - 4
+  - 0
+  resistance: 10
