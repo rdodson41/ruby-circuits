@@ -1,16 +1,1 @@
 # frozen_string_literal: true
-
-require('circuits/capacitor')
-require('circuits/component')
-require('circuits/current_source')
-require('circuits/ground')
-require('circuits/inductor')
-require('circuits/modified_nodal_analysis/a_matrix')
-require('circuits/modified_nodal_analysis/b_matrix')
-require('circuits/modified_nodal_analysis/voltage_incidence_matrix')
-require('circuits/modified_nodal_analysis/x_matrix')
-require('circuits/network')
-require('circuits/nodal_analysis/conductance_matrix')
-require('circuits/nodal_analysis/current_matrix')
-require('circuits/resistor')
-require('circuits/voltage_source')

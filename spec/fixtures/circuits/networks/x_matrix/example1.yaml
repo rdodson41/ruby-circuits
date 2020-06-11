@@ -1,7 +1,0 @@
---- !ruby/object:Matrix
-rows:
-- - 0.0
-- - 3.0
-- - 3.667
-- - 0.167
-column_count: 1
