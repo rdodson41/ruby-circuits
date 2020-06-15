@@ -1,22 +1,12 @@
---- !ruby/object:Circuits::CurrentMatrix
-nodes:
-- 0
-- 5
-- 2
-- 3
-- 6
-- 7
-- 1
-- 12
-- 4
-current_sources:
-- !ruby/object:Circuits::CurrentSource
-  nodes:
-  - 4
-  - 7
-  current: 0.001
-- !ruby/object:Circuits::CurrentSource
-  nodes:
-  - 0
-  - 6
-  current: 0.001
+--- !ruby/object:Matrix
+rows:
+- - -0.001
+- - 0
+- - 0
+- - 0
+- - 0.001
+- - 0.001
+- - 0
+- - 0
+- - -0.001
+column_count: 1

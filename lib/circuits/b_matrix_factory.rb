@@ -3,7 +3,7 @@
 require('matrix')
 
 module Circuits
-  class BMatrix
+  class BMatrixFactory
     attr_reader :current_matrix
     attr_reader :voltage_matrix
 
@@ -12,7 +12,7 @@ module Circuits
       @voltage_matrix = voltage_matrix
     end
 
-    def to_matrix
+    def b_matrix
       Matrix.vstack(current_matrix, voltage_matrix)
     end
   end

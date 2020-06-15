@@ -3,7 +3,7 @@
 require('matrix')
 
 module Circuits
-  class XMatrix
+  class XMatrixFactory
     attr_reader :a_matrix
     attr_reader :b_matrix
 
@@ -12,7 +12,7 @@ module Circuits
       @b_matrix = b_matrix
     end
 
-    def to_matrix
+    def x_matrix
       a_matrix.inverse * b_matrix
     end
   end

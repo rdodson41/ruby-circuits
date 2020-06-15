@@ -3,7 +3,7 @@
 require('matrix')
 
 module Circuits
-  class ConductanceMatrix
+  class ConductanceMatrixFactory
     attr_reader :nodes
     attr_reader :conductors
 
@@ -12,7 +12,7 @@ module Circuits
       @conductors = conductors
     end
 
-    def to_matrix
+    def conductance_matrix
       conductors.each_with_object(zero_matrix) do |conductor, matrix|
         conductor_nodes_indices = conductor.nodes.map(&index_nodes)
         conductor_nodes_indices.zip(conductor_nodes_indices) do |row, column|

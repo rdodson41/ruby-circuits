@@ -3,7 +3,7 @@
 require('matrix')
 
 module Circuits
-  class CurrentMatrix
+  class CurrentMatrixFactory
     attr_reader :nodes
     attr_reader :current_sources
 
@@ -12,7 +12,7 @@ module Circuits
       @current_sources = current_sources
     end
 
-    def to_matrix
+    def current_matrix
       current_sources.each_with_object(zero_matrix) do |current_source, matrix|
         anode_index, cathode_index = current_source.nodes.map(&index_nodes)
         matrix[anode_index, 0] -= current_source.current

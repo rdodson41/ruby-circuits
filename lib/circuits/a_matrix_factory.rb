@@ -3,7 +3,7 @@
 require('matrix')
 
 module Circuits
-  class AMatrix
+  class AMatrixFactory
     attr_reader :conductance_matrix
     attr_reader :voltage_incidence_matrix
 
@@ -12,7 +12,7 @@ module Circuits
       @voltage_incidence_matrix = voltage_incidence_matrix
     end
 
-    def to_matrix
+    def a_matrix
       Matrix.vstack(
         Matrix.hstack(conductance_matrix, voltage_incidence_matrix),
         Matrix.hstack(voltage_incidence_matrix.transpose, zero_matrix)
