@@ -1,0 +1,32 @@
+--- !ruby/object:Circuits::VoltageIncidenceMatrix
+nodes:
+- 0
+- 5
+- 2
+- 3
+- 6
+- 7
+- 1
+- 12
+- 4
+voltage_sources:
+- !ruby/object:Circuits::VoltageSource
+  nodes:
+  - 0
+  - 5
+  voltage: 2.0
+- !ruby/object:Circuits::VoltageSource
+  nodes:
+  - 2
+  - 3
+  voltage: 0.2
+- !ruby/object:Circuits::VoltageSource
+  nodes:
+  - 6
+  - 7
+  voltage: 2.0
+- !ruby/object:Circuits::Inductor
+  nodes:
+  - 2
+  - 12
+  inductance: 0.1
