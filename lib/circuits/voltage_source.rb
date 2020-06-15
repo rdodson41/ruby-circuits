@@ -14,5 +14,17 @@ module Circuits
       other.respond_to?(:nodes) && nodes == other.nodes &&
         other.respond_to?(:voltage) && voltage == other.voltage
     end
+
+    def conductor?
+      false
+    end
+
+    def current_source?
+      false
+    end
+
+    def voltage_source?
+      true
+    end
   end
 end

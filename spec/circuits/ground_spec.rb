@@ -34,4 +34,28 @@ RSpec.describe(Circuits::Ground) do
 
     it { is_expected.to(eq(other)) }
   end
+
+  describe '#conductor?' do
+    subject :conductor? do
+      ground.conductor?
+    end
+
+    it { is_expected.to(be(true)) }
+  end
+
+  describe '#current_source?' do
+    subject :current_source? do
+      ground.current_source?
+    end
+
+    it { is_expected.to(be(false)) }
+  end
+
+  describe '#voltage_source?' do
+    subject :voltage_source? do
+      ground.voltage_source?
+    end
+
+    it { is_expected.to(be(false)) }
+  end
 end

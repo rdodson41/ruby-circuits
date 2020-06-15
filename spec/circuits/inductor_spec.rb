@@ -26,4 +26,28 @@ RSpec.describe(Circuits::Inductor) do
 
     it { is_expected.to(eq(other)) }
   end
+
+  describe '#conductor?' do
+    subject :conductor? do
+      inductor.conductor?
+    end
+
+    it { is_expected.to(be(false)) }
+  end
+
+  describe '#current_source?' do
+    subject :current_source? do
+      inductor.current_source?
+    end
+
+    it { is_expected.to(be(false)) }
+  end
+
+  describe '#voltage_source?' do
+    subject :voltage_source? do
+      inductor.voltage_source?
+    end
+
+    it { is_expected.to(be(true)) }
+  end
 end

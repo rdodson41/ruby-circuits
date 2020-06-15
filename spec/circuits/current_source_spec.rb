@@ -18,4 +18,28 @@ RSpec.describe(Circuits::CurrentSource) do
 
     it { is_expected.to(eq(other)) }
   end
+
+  describe '#conductor?' do
+    subject :conductor? do
+      current_source.conductor?
+    end
+
+    it { is_expected.to(be(false)) }
+  end
+
+  describe '#current_source?' do
+    subject :current_source? do
+      current_source.current_source?
+    end
+
+    it { is_expected.to(be(true)) }
+  end
+
+  describe '#voltage_source?' do
+    subject :voltage_source? do
+      current_source.voltage_source?
+    end
+
+    it { is_expected.to(be(false)) }
+  end
 end
