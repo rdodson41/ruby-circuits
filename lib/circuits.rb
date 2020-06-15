@@ -2,6 +2,7 @@
 
 require('circuits/a_matrix_factory')
 require('circuits/b_matrix_factory')
+require('circuits/capacitor')
 require('circuits/conductance_matrix_factory')
 require('circuits/current_matrix_factory')
 require('circuits/current_source')
