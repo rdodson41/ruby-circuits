@@ -19,12 +19,32 @@ RSpec.describe(Circuits::Inductor) do
     it { is_expected.to(eq(0)) }
   end
 
+  describe '#hash' do
+    subject :hash do
+      inductor.hash
+    end
+
+    let :other do
+      described_class.new(nodes, 1e-9)
+    end
+
+    it { is_expected.to(eq(other.hash)) }
+  end
+
   describe '#==' do
     let :other do
       described_class.new(nodes, 1e-9)
     end
 
     it { is_expected.to(eq(other)) }
+  end
+
+  describe '#eql?' do
+    let :other do
+      described_class.new(nodes, 1e-9)
+    end
+
+    it { is_expected.to(eql(other)) }
   end
 
   describe '#conductor?' do

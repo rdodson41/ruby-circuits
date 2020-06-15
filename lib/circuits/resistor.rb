@@ -14,9 +14,18 @@ module Circuits
       1 / Float(resistance)
     end
 
+    def hash
+      [nodes, resistance].hash
+    end
+
     def ==(other)
       other.respond_to?(:nodes) && nodes == other.nodes &&
         other.respond_to?(:resistance) && resistance == other.resistance
+    end
+
+    def eql?(other)
+      other.respond_to?(:nodes) && nodes.eql?(other.nodes) &&
+        other.respond_to?(:resistance) && resistance.eql?(other.resistance)
     end
 
     def conductor?

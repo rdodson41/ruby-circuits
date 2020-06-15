@@ -10,9 +10,18 @@ module Circuits
       @voltage = voltage
     end
 
+    def hash
+      [nodes, voltage].hash
+    end
+
     def ==(other)
       other.respond_to?(:nodes) && nodes == other.nodes &&
         other.respond_to?(:voltage) && voltage == other.voltage
+    end
+
+    def eql?(other)
+      other.respond_to?(:nodes) && nodes.eql?(other.nodes) &&
+        other.respond_to?(:voltage) && voltage.eql?(other.voltage)
     end
 
     def conductor?

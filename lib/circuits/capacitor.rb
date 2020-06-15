@@ -10,9 +10,18 @@ module Circuits
       @capacitance = capacitance
     end
 
+    def hash
+      [nodes, capacitance].hash
+    end
+
     def ==(other)
       other.respond_to?(:nodes) && nodes == other.nodes &&
         other.respond_to?(:capacitance) && capacitance == other.capacitance
+    end
+
+    def eql?(other)
+      other.respond_to?(:nodes) && nodes.eql?(other.nodes) &&
+        other.respond_to?(:capacitance) && capacitance.eql?(other.capacitance)
     end
 
     def conductor?

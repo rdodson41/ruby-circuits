@@ -19,12 +19,32 @@ RSpec.describe(Circuits::Resistor) do
     it { is_expected.to(eq(1e-3)) }
   end
 
+  describe '#hash' do
+    subject :hash do
+      resistor.hash
+    end
+
+    let :other do
+      described_class.new(nodes, 1e3)
+    end
+
+    it { is_expected.to(eq(other.hash)) }
+  end
+
   describe '#==' do
     let :other do
       described_class.new(nodes, 1e3)
     end
 
     it { is_expected.to(eq(other)) }
+  end
+
+  describe '#eql?' do
+    let :other do
+      described_class.new(nodes, 1e3)
+    end
+
+    it { is_expected.to(eql(other)) }
   end
 
   describe '#conductor?' do

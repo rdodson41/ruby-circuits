@@ -16,8 +16,16 @@ module Circuits
       Float::INFINITY
     end
 
+    def hash
+      node.hash
+    end
+
     def ==(other)
       other.respond_to?(:node) && node == other.node
+    end
+
+    def eql?(other)
+      other.respond_to?(:nodes) && node.eql?(other.node)
     end
 
     def conductor?

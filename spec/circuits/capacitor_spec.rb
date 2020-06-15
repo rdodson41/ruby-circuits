@@ -11,12 +11,32 @@ RSpec.describe(Circuits::Capacitor) do
     instance_double(Array)
   end
 
+  describe '#hash' do
+    subject :hash do
+      capacitor.hash
+    end
+
+    let :other do
+      described_class.new(nodes, 1e-6)
+    end
+
+    it { is_expected.to(eq(other.hash)) }
+  end
+
   describe '#==' do
     let :other do
       described_class.new(nodes, 1e-6)
     end
 
     it { is_expected.to(eq(other)) }
+  end
+
+  describe '#eql?' do
+    let :other do
+      described_class.new(nodes, 1e-6)
+    end
+
+    it { is_expected.to(eql(other)) }
   end
 
   describe '#conductor?' do
