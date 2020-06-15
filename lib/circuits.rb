@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require('circuits/a_matrix')
 require('circuits/b_matrix')
 require('circuits/conductance_matrix')
 require('circuits/current_matrix')

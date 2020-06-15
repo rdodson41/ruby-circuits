@@ -5,11 +5,11 @@ require('yaml')
 
 RSpec.describe(Circuits::BMatrix) do
   subject :b_matrix do
-    described_class.new(current_matrix, voltage_matrix)
+    described_class.new(current_matrix_to_matrix, voltage_matrix)
   end
 
-  let :current_matrix do
-    YAML.load_file('spec/fixtures/circuits/current_matrix.yaml')
+  let :current_matrix_to_matrix do
+    YAML.load_file('spec/fixtures/circuits/current_matrix_to_matrix.yaml')
   end
 
   let :voltage_matrix do
