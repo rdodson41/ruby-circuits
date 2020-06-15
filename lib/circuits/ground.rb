@@ -15,5 +15,9 @@ module Circuits
     def conductance
       Float::INFINITY
     end
+
+    def ==(other)
+      other.respond_to?(:node) && node == other.node
+    end
   end
 end

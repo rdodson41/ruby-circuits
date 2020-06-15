@@ -18,4 +18,12 @@ RSpec.describe(Circuits::Resistor) do
 
     it { is_expected.to(eq(1e-3)) }
   end
+
+  describe '#==' do
+    let :other do
+      described_class.new(nodes, 1e3)
+    end
+
+    it { is_expected.to(eq(other)) }
+  end
 end

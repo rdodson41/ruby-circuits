@@ -9,5 +9,10 @@ module Circuits
       @nodes = nodes
       @current = current
     end
+
+    def ==(other)
+      other.respond_to?(:nodes) && nodes == other.nodes &&
+        other.respond_to?(:current) && current == other.current
+    end
   end
 end

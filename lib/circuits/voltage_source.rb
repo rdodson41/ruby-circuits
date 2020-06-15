@@ -9,5 +9,10 @@ module Circuits
       @nodes = nodes
       @voltage = voltage
     end
+
+    def ==(other)
+      other.respond_to?(:nodes) && nodes == other.nodes &&
+        other.respond_to?(:voltage) && voltage == other.voltage
+    end
   end
 end

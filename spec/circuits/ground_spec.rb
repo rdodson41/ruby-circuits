@@ -26,4 +26,12 @@ RSpec.describe(Circuits::Ground) do
 
     it { is_expected.to(eq(Float::INFINITY)) }
   end
+
+  describe '#==' do
+    let :other do
+      described_class.new(node)
+    end
+
+    it { is_expected.to(eq(other)) }
+  end
 end

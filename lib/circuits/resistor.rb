@@ -13,5 +13,10 @@ module Circuits
     def conductance
       1 / Float(resistance)
     end
+
+    def ==(other)
+      other.respond_to?(:nodes) && nodes == other.nodes &&
+        other.respond_to?(:resistance) && resistance == other.resistance
+    end
   end
 end

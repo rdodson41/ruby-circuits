@@ -9,5 +9,10 @@ module Circuits
       @nodes = nodes
       @capacitance = capacitance
     end
+
+    def ==(other)
+      other.respond_to?(:nodes) && nodes == other.nodes &&
+        other.respond_to?(:capacitance) && capacitance == other.capacitance
+    end
   end
 end

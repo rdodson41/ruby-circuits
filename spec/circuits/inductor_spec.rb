@@ -18,4 +18,12 @@ RSpec.describe(Circuits::Inductor) do
 
     it { is_expected.to(eq(0)) }
   end
+
+  describe '#==' do
+    let :other do
+      described_class.new(nodes, 1e-9)
+    end
+
+    it { is_expected.to(eq(other)) }
+  end
 end
