@@ -7,7 +7,15 @@ require('yaml')
 
 RSpec.describe(Circuits::VoltageIncidenceMatrixFactory) do
   subject :voltage_incidence_matrix_factory do
-    YAML.load_file('spec/fixtures/circuits/voltage_incidence_matrix_factory.yaml')
+    described_class.new(nodes, voltage_sources)
+  end
+
+  let :nodes do
+    YAML.load_file('spec/fixtures/circuits/nodes.yaml')
+  end
+
+  let :voltage_sources do
+    YAML.load_file('spec/fixtures/circuits/voltage_sources.yaml')
   end
 
   describe '#voltage_incidence_matrix' do

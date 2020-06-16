@@ -1,15 +1,4 @@
---- !ruby/object:Circuits::ConductanceMatrixFactory
-nodes:
-- 0
-- 5
-- 2
-- 3
-- 6
-- 7
-- 1
-- 12
-- 4
-conductors:
+---
 - !ruby/object:Circuits::Ground
   node: 0
 - !ruby/object:Circuits::Resistor
@@ -21,12 +10,12 @@ conductors:
   nodes:
   - 1
   - 12
-  resistance: 1
+  resistance: 1.0
 - !ruby/object:Circuits::Resistor
   nodes:
   - 5
   - 2
-  resistance: 50
+  resistance: 50.0
 - !ruby/object:Circuits::Resistor
   nodes:
   - 5
@@ -51,4 +40,4 @@ conductors:
   nodes:
   - 4
   - 0
-  resistance: 10
+  resistance: 10.0

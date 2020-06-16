@@ -1,15 +1,4 @@
---- !ruby/object:Circuits::CurrentMatrixFactory
-nodes:
-- 0
-- 5
-- 2
-- 3
-- 6
-- 7
-- 1
-- 12
-- 4
-current_sources:
+---
 - !ruby/object:Circuits::CurrentSource
   nodes:
   - 4

@@ -1,15 +1,4 @@
---- !ruby/object:Circuits::VoltageIncidenceMatrixFactory
-nodes:
-- 0
-- 5
-- 2
-- 3
-- 6
-- 7
-- 1
-- 12
-- 4
-voltage_sources:
+---
 - !ruby/object:Circuits::VoltageSource
   nodes:
   - 0

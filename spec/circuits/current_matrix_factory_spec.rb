@@ -6,7 +6,15 @@ require('yaml')
 
 RSpec.describe(Circuits::CurrentMatrixFactory) do
   subject :current_matrix_factory do
-    YAML.load_file('spec/fixtures/circuits/current_matrix_factory.yaml')
+    described_class.new(nodes, current_sources)
+  end
+
+  let :nodes do
+    YAML.load_file('spec/fixtures/circuits/nodes.yaml')
+  end
+
+  let :current_sources do
+    YAML.load_file('spec/fixtures/circuits/current_sources.yaml')
   end
 
   describe '#current_matrix' do

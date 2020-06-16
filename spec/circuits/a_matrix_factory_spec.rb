@@ -5,7 +5,15 @@ require('yaml')
 
 RSpec.describe(Circuits::AMatrixFactory) do
   subject :a_matrix_factory do
-    YAML.load_file('spec/fixtures/circuits/a_matrix_factory.yaml')
+    described_class.new(conductance_matrix, voltage_incidence_matrix)
+  end
+
+  let :conductance_matrix do
+    YAML.load_file('spec/fixtures/circuits/conductance_matrix.yaml')
+  end
+
+  let :voltage_incidence_matrix do
+    YAML.load_file('spec/fixtures/circuits/voltage_incidence_matrix.yaml')
   end
 
   describe '#a_matrix' do

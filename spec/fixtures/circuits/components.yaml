@@ -1,0 +1,83 @@
+---
+- !ruby/object:Circuits::Ground
+  node: 0
+- !ruby/object:Circuits::VoltageSource
+  nodes:
+  - 0
+  - 5
+  voltage: 2.0
+- !ruby/object:Circuits::VoltageSource
+  nodes:
+  - 2
+  - 3
+  voltage: 0.2
+- !ruby/object:Circuits::VoltageSource
+  nodes:
+  - 6
+  - 7
+  voltage: 2.0
+- !ruby/object:Circuits::Resistor
+  nodes:
+  - 1
+  - 5
+  resistance: 1.5
+- !ruby/object:Circuits::Resistor
+  nodes:
+  - 1
+  - 12
+  resistance: 1.0
+- !ruby/object:Circuits::Resistor
+  nodes:
+  - 5
+  - 2
+  resistance: 50.0
+- !ruby/object:Circuits::Resistor
+  nodes:
+  - 5
+  - 6
+  resistance: 0.1
+- !ruby/object:Circuits::Resistor
+  nodes:
+  - 2
+  - 6
+  resistance: 1.5
+- !ruby/object:Circuits::Resistor
+  nodes:
+  - 3
+  - 4
+  resistance: 0.2
+- !ruby/object:Circuits::Resistor
+  nodes:
+  - 7
+  - 0
+  resistance: 1000.0
+- !ruby/object:Circuits::Resistor
+  nodes:
+  - 4
+  - 0
+  resistance: 10.0
+- !ruby/object:Circuits::CurrentSource
+  nodes:
+  - 4
+  - 7
+  current: 0.001
+- !ruby/object:Circuits::CurrentSource
+  nodes:
+  - 0
+  - 6
+  current: 0.001
+- !ruby/object:Circuits::Capacitor
+  nodes:
+  - 7
+  - 0
+  capacitance: 0.1
+- !ruby/object:Circuits::Capacitor
+  nodes:
+  - 2
+  - 0
+  capacitance: 0.2
+- !ruby/object:Circuits::Inductor
+  nodes:
+  - 2
+  - 12
+  inductance: 0.1

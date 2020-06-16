@@ -13,16 +13,21 @@ module Circuits
     end
 
     def a_matrix
-      Matrix.vstack(
-        Matrix.hstack(conductance_matrix, voltage_incidence_matrix),
-        Matrix.hstack(voltage_incidence_matrix.transpose, zero_matrix)
-      )
+      Matrix.vstack(upper_a_matrix, lower_a_matrix)
     end
 
     private
 
-    def zero_matrix
+    def upper_a_matrix
+      Matrix.hstack(conductance_matrix, voltage_incidence_matrix)
+    end
+
+    def d_matrix
       Matrix.zero(voltage_incidence_matrix.column_count)
+    end
+
+    def lower_a_matrix
+      Matrix.hstack(voltage_incidence_matrix.transpose, d_matrix)
     end
   end
 end
