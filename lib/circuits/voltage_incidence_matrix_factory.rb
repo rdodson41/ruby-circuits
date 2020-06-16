@@ -14,9 +14,9 @@ module Circuits
 
     def voltage_incidence_matrix
       voltage_sources.each_with_index.with_object(zero_matrix) do |(voltage_source, column), matrix|
-        anode_index, cathode_index = voltage_source.nodes.map(&index_nodes)
-        matrix[anode_index, column] -= 1
-        matrix[cathode_index, column] += 1
+        voltage_source.nodes.map(&index_nodes).zip([-1, 1]) do |row, orientation|
+          matrix[row, column] += orientation
+        end
       end
     end
 

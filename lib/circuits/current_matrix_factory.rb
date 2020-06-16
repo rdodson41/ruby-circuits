@@ -14,9 +14,9 @@ module Circuits
 
     def current_matrix
       current_sources.each_with_object(zero_matrix) do |current_source, matrix|
-        anode_index, cathode_index = current_source.nodes.map(&index_nodes)
-        matrix[anode_index, 0] -= current_source.current
-        matrix[cathode_index, 0] += current_source.current
+        current_source.nodes.map(&index_nodes).zip([-1, 1]) do |row, orientation|
+          matrix[row, 0] += orientation * current_source.current
+        end
       end
     end
 
