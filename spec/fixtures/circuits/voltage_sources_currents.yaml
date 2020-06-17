@@ -1,0 +1,25 @@
+---
+? !ruby/object:Circuits::VoltageSource
+  nodes:
+  - 0
+  - 5
+  voltage: 2.0
+: -0.20006032896516185
+? !ruby/object:Circuits::VoltageSource
+  nodes:
+  - 2
+  - 3
+  voltage: 0.2
+: -0.19807236920102358
+? !ruby/object:Circuits::VoltageSource
+  nodes:
+  - 6
+  - 7
+  voltage: 2.0
+: -0.002987959764137765
+? !ruby/object:Circuits::Inductor
+  nodes:
+  - 2
+  - 12
+  inductance: 0.1
+: 0.07586473365982103

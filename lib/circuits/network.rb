@@ -64,6 +64,12 @@ module Circuits
       end
     end
 
+    def voltage_sources_currents
+      voltage_sources.map.with_index(nodes.length).with_object({}) do |(voltage_source, row), currents|
+        currents[voltage_source] = x_matrix[row, 0]
+      end
+    end
+
     private
 
     def conductance_matrix_factory
