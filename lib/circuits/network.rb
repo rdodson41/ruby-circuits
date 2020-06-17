@@ -58,6 +58,12 @@ module Circuits
       a_matrix.inverse * b_matrix
     end
 
+    def nodes_voltages
+      nodes.map.with_index.with_object({}) do |(node, row), voltages|
+        voltages[node] = x_matrix[row, 0]
+      end
+    end
+
     private
 
     def conductance_matrix_factory

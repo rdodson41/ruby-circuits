@@ -105,4 +105,12 @@ RSpec.describe(Circuits::Network) do
 
     it { is_expected.to(eq(YAML.load_file('spec/fixtures/circuits/x_matrix.yaml'))) }
   end
+
+  describe '#nodes_voltages' do
+    subject :nodes_voltages do
+      network.nodes_voltages
+    end
+
+    it { is_expected.to(eq(YAML.load_file('spec/fixtures/circuits/nodes_voltages.yaml'))) }
+  end
 end
